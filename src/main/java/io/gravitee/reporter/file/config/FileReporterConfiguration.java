@@ -18,23 +18,19 @@ package io.gravitee.reporter.file.config;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
- * File reporter client configuration.
- *  
- * @author Loic DASSONVILLE (loic.dassonville at gmail.com)
+ * @author David BRASSELY (david.brassely at graviteesource.com)
+ * @author GraviteeSource Team
  */
-public class Config {
+public class FileReporterConfiguration {
 
 	/**
 	 *  Reporter file name. 
 	 */
-	@Value("${reporters.file.fileName:#{systemProperties['gravitee.home']}/logs/access-yyyy_mm_dd.log}")
-	private String filename;
+	@Value("${reporters.file.outputDir:#{systemProperties['gravitee.home']}/out}")
+	private String outputDirectory;
 
-	/**
-	 * Whether existing files will be appended to or not.
-	 */
-	@Value("${reporters.file.append:true}")
-	private boolean append;
+	@Value("${reporters.file.outputDir:%s-yyyy_mm_dd.csv}")
+	private String filePattern;
 
 	/**
 	 * The number of days to retain files before deleting them. 0 to retain forever.
@@ -54,12 +50,12 @@ public class Config {
 	@Value("${reporters.file.backupFormat:HHmmssSSS}")
 	private String backupFormat;
 
-	public String getFilename() {
-		return filename;
+	public String getOutputDirectory() {
+		return outputDirectory;
 	}
 
-	public boolean isAppend() {
-		return append;
+	public String getFilePattern() {
+		return filePattern;
 	}
 
 	public int getRetainDays() {

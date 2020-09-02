@@ -17,7 +17,7 @@ package io.gravitee.reporter.file;
 
 import io.gravitee.common.http.HttpMethod;
 import io.gravitee.reporter.api.http.Metrics;
-import io.gravitee.reporter.file.config.Config;
+import io.gravitee.reporter.file.config.FileReporterConfiguration;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,13 +40,13 @@ import java.util.List;
 import static io.gravitee.reporter.api.http.SecurityType.API_KEY;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FileReporterTest {
+public class FileReporter2Test {
 
 	@Mock
-	Config config;
+    FileReporterConfiguration config;
 
 	@InjectMocks
-	FileReporter reporter;
+    FileReporter2 reporter;
 	
 	@Rule
     public TemporaryFolder logFolder = new TemporaryFolder();
@@ -54,7 +54,7 @@ public class FileReporterTest {
 	@Test
 	public void reportTest() throws Exception {
 		File logFile = logFolder.newFile();
-		Mockito.when(config.getFilename()).thenReturn(logFile.getAbsolutePath());
+//		Mockito.when(config.getFilename()).thenReturn(logFile.getAbsolutePath());
 		
 		LocalDateTime ldt = LocalDateTime.of(2016, Month.FEBRUARY, 29, 16, 23, 6, 99000000);
 		LocalDateTime ldt2 = LocalDateTime.of(2015, Month.NOVEMBER, 22, 07, 56, 56, 199000000);
